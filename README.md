@@ -7,7 +7,7 @@ A high-end luxury e-commerce website for **Elvan Fragrances**, built with HTML5,
 - **Warm Beige**: `#E8DCC8` (Text & Secondary Neutrals)
 - **Soft Gold**: `#C6A75E` (Highlights & Luxury Accents)
 - **Monogram**: EV Monogram branding
-- **Flagship Product**: *Elvan Aura* Eau de Parfum (100ml)
+- **Flagship Product**: *Elvan Aura* Eau de Parfum (100ml) - ₹2,199
 
 ---
 

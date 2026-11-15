@@ -222,11 +222,11 @@
                     
                     <!-- Primary CTA -->
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-1 sm:pt-2">
-                        <button onclick="addToCart('Elvan Aura Eau de Parfum', 145, '157281.jpg.jpeg')" class="btn-gold-shimmer w-full sm:w-auto px-8 sm:px-10 py-3.5 sm:py-4 bg-[#C6A75E] text-[#1F2A44] font-cinzel font-bold text-xs sm:text-sm tracking-[0.2em] uppercase hover:bg-[#E8DCC8] hover:shadow-[0_0_25px_rgba(198,167,94,0.4)] active:scale-95 transition-all duration-200 shadow-xl text-center group">
+                        <button onclick="addToCart('Elvan Aura Eau de Parfum', 2199, '157281.jpg.jpeg')" class="btn-gold-shimmer w-full sm:w-auto px-8 sm:px-10 py-3.5 sm:py-4 bg-[#C6A75E] text-[#1F2A44] font-cinzel font-bold text-xs sm:text-sm tracking-[0.2em] uppercase hover:bg-[#E8DCC8] hover:shadow-[0_0_25px_rgba(198,167,94,0.4)] active:scale-95 transition-all duration-200 shadow-xl text-center group">
                             <span class="flex items-center justify-center gap-2.5 sm:gap-3">
                                 <span>Shop Elvan Aura</span>
                                 <span class="text-[#1F2A44]/60">&bull;</span>
-                                <span class="font-extrabold">$145</span>
+                                <span class="font-extrabold">₹2,199</span>
                                 <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
                             </span>
                         </button>
@@ -582,7 +582,7 @@
                 <div class="p-4 sm:p-6 border-t border-[#C6A75E]/20 space-y-3 sm:space-y-4 bg-[#1F2A44] pb-safe">
                     <div class="flex justify-between font-cinzel text-base sm:text-lg font-bold">
                         <span>Subtotal:</span>
-                        <span id="cart-subtotal" class="gold-gradient-text">$0.00</span>
+                        <span id="cart-subtotal" class="gold-gradient-text">₹0</span>
                     </div>
                     <p class="text-[11px] sm:text-xs text-[#E8DCC8]/70">Complimentary insured express shipping applied.</p>
                     <button onclick="checkout()" class="btn-gold-shimmer w-full py-3.5 sm:py-4 gold-gradient-bg text-[#1F2A44] font-cinzel font-bold text-xs sm:text-sm tracking-widest uppercase hover:brightness-110 active:scale-98 transition-all shadow-lg text-center rounded">
@@ -712,7 +712,7 @@
 
             if (cart.length === 0) {
                 container.innerHTML = '<p class="text-center text-[#E8DCC8]/60 py-12 font-cinzel tracking-widest text-xs sm:text-sm">Your shopping bag is empty.</p>';
-                subtotalEl.textContent = '$0.00';
+                subtotalEl.textContent = '₹0';
                 return;
             }
 
@@ -726,7 +726,7 @@
                         <img src="${item.image}" alt="${item.name}" class="w-14 h-14 sm:w-16 sm:h-16 object-cover rounded-lg border border-[#C6A75E]/40 shrink-0">
                         <div class="flex-1 min-w-0">
                             <h4 class="font-cinzel font-bold text-xs sm:text-sm text-[#E8DCC8] truncate">${item.name}</h4>
-                            <p class="text-xs gold-gradient-text font-bold mt-0.5">$${item.price}</p>
+                            <p class="text-xs gold-gradient-text font-bold mt-0.5">₹${item.price.toLocaleString('en-IN')}</p>
                             <div class="flex items-center gap-3 mt-2">
                                 <button onclick="updateQuantity(${index}, -1)" class="w-7 h-7 sm:w-6 sm:h-6 flex items-center justify-center text-xs bg-[#141C2E] rounded border border-[#C6A75E]/30 active:bg-[#C6A75E] active:text-[#1F2A44] transition-colors" aria-label="Decrease quantity">-</button>
                                 <span class="text-xs font-bold px-1">${item.quantity}</span>
@@ -741,7 +741,7 @@
             });
 
             container.innerHTML = html;
-            subtotalEl.textContent = '$' + subtotal.toFixed(2);
+            subtotalEl.textContent = '₹' + subtotal.toLocaleString('en-IN');
         }
 
         function updateQuantity(index, change) {
