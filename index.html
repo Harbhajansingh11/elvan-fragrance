@@ -250,14 +250,14 @@
                 </div>
 
                 <!-- Right Hero Image Showcase -->
-                <div class="lg:col-span-5 flex justify-center">
+                <div class="lg:col-span-5 flex flex-col items-center justify-center">
                     <div class="relative w-full max-w-xs sm:max-w-sm lg:max-w-md mx-auto">
                         <!-- Subtle Gold Frame Glow -->
                         <div class="absolute -inset-2 bg-[#C6A75E]/20 rounded-2xl sm:rounded-3xl blur-xl pointer-events-none"></div>
                         
                         <!-- Bottle Frame -->
                         <div class="relative rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#C6A75E]/60 shadow-[0_16px_40px_rgba(0,0,0,0.6)] bg-[#141C2E]">
-                            <img src="157281.jpg.jpeg" alt="Elvan Aura Eau de Parfum" class="w-full h-[370px] sm:h-[440px] lg:h-[480px] object-cover object-top" loading="eager">
+                            <img id="hero-img" src="157281.jpg.jpeg" alt="Elvan Aura Eau de Parfum" class="w-full h-[370px] sm:h-[440px] lg:h-[480px] object-cover object-top transition-opacity duration-300" loading="eager">
                             
                             <!-- Shading Gradient Overlay -->
                             <div class="absolute inset-0 bg-gradient-to-t from-[#141C2E] via-transparent to-transparent opacity-75"></div>
@@ -270,6 +270,16 @@
                                 <h3 class="font-cinzel text-sm sm:text-xl font-bold text-[#E8DCC8] drop-shadow-md">&ldquo;A fragrance that stays with you&rdquo;</h3>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- 2-Picture Thumbnails Selector -->
+                    <div class="flex items-center gap-3 mt-4">
+                        <button onclick="switchHeroImage('157281.jpg.jpeg', this)" class="hero-thumb active w-12 h-14 rounded-lg overflow-hidden border-2 border-[#C6A75E] shadow-md transition-all p-0.5 bg-[#141C2E]" title="View Edition 1" aria-label="Show Photo 1">
+                            <img src="157281.jpg.jpeg" alt="Edition 1" class="w-full h-full object-cover object-top rounded">
+                        </button>
+                        <button onclick="switchHeroImage('picture12.jpeg', this)" class="hero-thumb w-12 h-14 rounded-lg overflow-hidden border-2 border-[#C6A75E]/30 hover:border-[#C6A75E] shadow-md transition-all p-0.5 bg-[#141C2E]" title="View Edition 2" aria-label="Show Photo 2">
+                            <img src="picture12.jpeg" alt="Edition 2" class="w-full h-full object-cover object-top rounded">
+                        </button>
                     </div>
                 </div>
 
@@ -348,31 +358,56 @@
 
     <!-- Brand Story & Essence Section -->
     <section id="story" class="py-16 sm:py-24 bg-[#1F2A44] border-t border-[#C6A75E]/20 relative z-10">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal-item">
-            <span class="text-[11px] sm:text-xs tracking-[0.35em] uppercase text-[#C6A75E] font-semibold">The Philosophy</span>
-            <h2 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold mt-2 mb-4 sm:mb-6">Crafted for Timeless Presence</h2>
-            <p class="text-[#E8DCC8]/85 font-light leading-relaxed text-sm sm:text-base lg:text-lg px-2 sm:px-0">
-                At Elvan Fragrances, we believe scent is the ultimate invisible accessory. Inspired by deep oceanic serenity and refined royal gold, each bottle is meticulously formulated to evoke confidence, mystique, and an unforgettable aura.
-            </p>
-            <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6 sm:gap-10 lg:gap-14 mt-8 sm:mt-12 text-[#C6A75E]">
-                <div class="flex items-center gap-3 group cursor-default">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#141C2E] border border-[#C6A75E]/40 flex items-center justify-center group-hover:scale-105 group-hover:border-[#C6A75E] transition-all">
-                        <i class="fa-solid fa-droplet text-xs sm:text-sm text-[#C6A75E]"></i>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                
+                <!-- Left: Editorial Photo (picture12.jpeg) -->
+                <div class="lg:col-span-5 flex justify-center reveal-item">
+                    <div class="relative w-full max-w-xs sm:max-w-sm lg:max-w-md mx-auto">
+                        <div class="absolute -inset-2 bg-[#C6A75E]/20 rounded-2xl sm:rounded-3xl blur-xl pointer-events-none"></div>
+                        <div class="relative rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#C6A75E]/60 shadow-[0_16px_40px_rgba(0,0,0,0.6)] bg-[#141C2E]">
+                            <img src="picture12.jpeg" alt="Elvan Fragrance Collection" class="w-full h-[370px] sm:h-[440px] lg:h-[480px] object-cover object-top" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#141C2E] via-transparent to-transparent opacity-75"></div>
+                            <div class="absolute bottom-3 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 text-center">
+                                <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-[#C6A75E] font-semibold bg-[#141C2E]/90 border border-[#C6A75E]/40 px-3 py-1 rounded-full shadow-sm">Bespoke Flacon</span>
+                                <h3 class="font-cinzel text-sm sm:text-lg font-bold text-[#E8DCC8] mt-1.5 drop-shadow-md">The Essence of Royalty</h3>
+                            </div>
+                        </div>
                     </div>
-                    <span class="font-cinzel text-xs sm:text-sm text-[#E8DCC8] tracking-widest uppercase font-semibold">Pure Extrait</span>
                 </div>
-                <div class="flex items-center gap-3 group cursor-default">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#141C2E] border border-[#C6A75E]/40 flex items-center justify-center group-hover:scale-105 group-hover:border-[#C6A75E] transition-all">
-                        <i class="fa-solid fa-shield-heart text-xs sm:text-sm text-[#C6A75E]"></i>
+
+                <!-- Right: Philosophy & Craft Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left reveal-item">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8DCC8]/10 border border-[#C6A75E]/40 text-[11px] sm:text-xs tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#C6A75E] shadow-sm">
+                        <i class="fa-solid fa-gem text-[9px] text-[#C6A75E]"></i>
+                        <span>The Philosophy & Craft</span>
                     </div>
-                    <span class="font-cinzel text-xs sm:text-sm text-[#E8DCC8] tracking-widest uppercase font-semibold">Skin Safe & Cruelty Free</span>
-                </div>
-                <div class="flex items-center gap-3 group cursor-default">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#141C2E] border border-[#C6A75E]/40 flex items-center justify-center group-hover:scale-105 group-hover:border-[#C6A75E] transition-all">
-                        <i class="fa-solid fa-gem text-xs sm:text-sm text-[#C6A75E]"></i>
+                    <h2 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold mt-2">Crafted for Timeless Presence</h2>
+                    <p class="text-[#E8DCC8]/85 font-light leading-relaxed text-sm sm:text-base lg:text-lg">
+                        At Elvan Fragrances, we believe scent is the ultimate invisible accessory. Inspired by deep oceanic serenity and refined royal gold, each bottle is meticulously formulated to evoke confidence, mystique, and an unforgettable aura.
+                    </p>
+                    <div class="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start items-center gap-4 sm:gap-8 pt-2 text-[#C6A75E]">
+                        <div class="flex items-center gap-3 group cursor-default">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#141C2E] border border-[#C6A75E]/40 flex items-center justify-center group-hover:scale-105 group-hover:border-[#C6A75E] transition-all">
+                                <i class="fa-solid fa-droplet text-xs sm:text-sm text-[#C6A75E]"></i>
+                            </div>
+                            <span class="font-cinzel text-xs sm:text-sm text-[#E8DCC8] tracking-widest uppercase font-semibold">Pure Extrait</span>
+                        </div>
+                        <div class="flex items-center gap-3 group cursor-default">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#141C2E] border border-[#C6A75E]/40 flex items-center justify-center group-hover:scale-105 group-hover:border-[#C6A75E] transition-all">
+                                <i class="fa-solid fa-shield-heart text-xs sm:text-sm text-[#C6A75E]"></i>
+                            </div>
+                            <span class="font-cinzel text-xs sm:text-sm text-[#E8DCC8] tracking-widest uppercase font-semibold">Cruelty Free</span>
+                        </div>
+                        <div class="flex items-center gap-3 group cursor-default">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#141C2E] border border-[#C6A75E]/40 flex items-center justify-center group-hover:scale-105 group-hover:border-[#C6A75E] transition-all">
+                                <i class="fa-solid fa-crown text-xs sm:text-sm text-[#C6A75E]"></i>
+                            </div>
+                            <span class="font-cinzel text-xs sm:text-sm text-[#E8DCC8] tracking-widest uppercase font-semibold">Master Perfumery</span>
+                        </div>
                     </div>
-                    <span class="font-cinzel text-xs sm:text-sm text-[#E8DCC8] tracking-widest uppercase font-semibold">Master Perfumery</span>
                 </div>
+
             </div>
         </div>
     </section>
@@ -664,6 +699,26 @@
         function quickSearch(term) {
             document.getElementById('search-input').value = term;
             openSearchModal();
+        }
+
+        // Hero Image Thumbnail Switcher
+        function switchHeroImage(src, btn) {
+            const heroImg = document.getElementById('hero-img');
+            if (heroImg) {
+                heroImg.style.opacity = '0.3';
+                setTimeout(() => {
+                    heroImg.src = src;
+                    heroImg.style.opacity = '1';
+                }, 150);
+            }
+            document.querySelectorAll('.hero-thumb').forEach(t => {
+                t.classList.remove('border-[#C6A75E]', 'active');
+                t.classList.add('border-[#C6A75E]/30');
+            });
+            if (btn) {
+                btn.classList.remove('border-[#C6A75E]/30');
+                btn.classList.add('border-[#C6A75E]', 'active');
+            }
         }
 
         // Responsive Toast Notification System
