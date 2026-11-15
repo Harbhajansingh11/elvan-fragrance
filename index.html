@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#141C2E">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Elvan Fragrances - Luxury Haute Parfumerie. Handcrafted with rare botanicals, warm golden amber, and eternal sillage.">
+    <title>Elvan Fragrances | Luxury Eau de Parfum</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#1F2A44',
+                        'navy-dark': '#141C2E',
+                        'navy-deep': '#0D1322',
+                        'warm-beige': '#E8DCC8',
+                        'warm-beige-light': '#F4EFE6',
+                        'soft-gold': '#C6A75E',
+                        'soft-gold-light': '#D4BC7B',
+                        'gold-accent': '#E5C478',
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth Gold Gradients */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #F4EFE6 0%, #D4BC7B 35%, #C6A75E 70%, #9A7B38 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #D4BC7B 0%, #C6A75E 50%, #9A7B38 100%);
+        }
+
+        /* Custom Luxury Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #141C2E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C6A75E;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4BC7B;
+        }
+
+        /* Shimmer Beam Effect for Buttons */
+        .btn-gold-shimmer {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .btn-gold-shimmer::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -150%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                60deg,
+                transparent 25%,
+                rgba(255, 255, 255, 0.35) 50%,
+                transparent 75%
+            );
+            transform: rotate(25deg);
+            pointer-events: none;
+        }
+        .btn-gold-shimmer:hover::after {
+            left: 150%;
+            transition: all 0.75s ease-out;
+        }
+
+        /* High-Performance Luxury Cards */
+        .luxury-card {
+            background: #1F2A44;
+            border: 1px solid rgba(198, 167, 94, 0.22);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            will-change: transform;
+        }
+        .luxury-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(198, 167, 94, 0.55);
+            box-shadow: 0 14px 28px -10px rgba(198, 167, 94, 0.25);
+        }
+
+        /* Scroll Reveal Effect */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+        .reveal-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Accords Animated Bar */
+        .accord-bar-fill {
+            width: 0%;
+            transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Subtle pulse for cart badge */
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(198, 167, 94, 0.4); }
+            50% { box-shadow: 0 0 0 5px rgba(198, 167, 94, 0); }
+        }
+        .badge-pulse {
+            animation: badgePulse 3s infinite;
+        }
+
+        /* iOS Safe Area Padding */
+        .pb-safe {
+            padding-bottom: max(1rem, env(safe-area-inset-bottom));
+        }
+
+        /* Mobile Tap Highlights */
+        button, a {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-[#141C2E] text-[#E8DCC8] font-sans antialiased selection:bg-[#C6A75E] selection:text-[#1F2A44] overflow-x-hidden min-h-screen flex flex-col">
+
+    <!-- Navigation Header -->
+    <header id="navbar" class="sticky top-0 z-50 bg-[#141C2E]/95 backdrop-blur-md border-b border-[#C6A75E]/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-[#E8DCC8] hover:text-[#C6A75E] focus:outline-none w-10 h-10 flex items-center justify-center rounded-lg transition-colors" aria-label="Toggle Navigation">
+                <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
+            </button>
+
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2.5 sm:gap-3 group">
+                <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#1F2A44] border-2 border-[#C6A75E] flex items-center justify-center shadow-md shadow-[#C6A75E]/20 group-hover:scale-105 group-hover:border-[#E5C478] transition-all duration-300">
+                    <span class="font-cinzel font-bold text-base sm:text-lg gold-gradient-text tracking-wider">EV</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-cinzel font-bold text-lg sm:text-xl tracking-[0.2em] sm:tracking-[0.22em] text-[#E8DCC8] group-hover:text-[#F4EFE6] transition-colors">ELVAN</span>
+                    <span class="text-[8px] sm:text-[9px] tracking-[0.35em] sm:tracking-[0.38em] text-[#C6A75E] uppercase -mt-0.5 sm:-mt-1 font-semibold">Fragrances</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 lg:space-x-10 text-sm tracking-widest uppercase font-medium">
+                <a href="#home" class="text-[#C6A75E] hover:text-[#E8DCC8] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#C6A75E]">Home</a>
+                <a href="#story" class="text-[#E8DCC8]/80 hover:text-[#C6A75E] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[2px] after:bg-[#C6A75E] after:transition-all after:duration-300">Our Craft</a>
+                <a href="#accords" class="text-[#E8DCC8]/80 hover:text-[#C6A75E] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[2px] after:bg-[#C6A75E] after:transition-all after:duration-300">The Scent</a>
+                <a href="#reviews" class="text-[#E8DCC8]/80 hover:text-[#C6A75E] transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[2px] after:bg-[#C6A75E] after:transition-all after:duration-300">Reviews</a>
+            </nav>
+
+            <!-- Header Action Buttons -->
+            <div class="flex items-center space-x-3 sm:space-x-5">
+                <button onclick="openSearchModal()" class="w-10 h-10 flex items-center justify-center text-[#E8DCC8] hover:text-[#C6A75E] transition-colors rounded-full" title="Search Notes" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                </button>
+                <button onclick="toggleCartDrawer()" class="relative w-10 h-10 flex items-center justify-center text-[#E8DCC8] hover:text-[#C6A75E] transition-colors rounded-full" title="Shopping Bag" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping text-lg"></i>
+                    <span id="cart-badge" class="absolute top-1 right-1 bg-[#C6A75E] text-[#1F2A44] font-bold text-[10px] w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center shadow-md badge-pulse">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#141C2E] border-b border-[#C6A75E]/20 px-6 py-4 space-y-3 font-cinzel text-sm shadow-2xl">
+            <a href="#home" onclick="closeMobileMenu()" class="block text-[#C6A75E] py-2 border-b border-[#C6A75E]/10">Home</a>
+            <a href="#story" onclick="closeMobileMenu()" class="block text-[#E8DCC8] py-2 border-b border-[#C6A75E]/10 hover:text-[#C6A75E]">Our Craft</a>
+            <a href="#accords" onclick="closeMobileMenu()" class="block text-[#E8DCC8] py-2 border-b border-[#C6A75E]/10 hover:text-[#C6A75E]">The Scent</a>
+            <a href="#reviews" onclick="closeMobileMenu()" class="block text-[#E8DCC8] py-2 hover:text-[#C6A75E]">Reviews</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative flex-1 flex items-center justify-center bg-[#1F2A44] overflow-hidden py-10 sm:py-16 lg:py-24 z-10">
+        <!-- Ambient Radial Glows -->
+        <div class="absolute -top-32 -left-32 w-72 sm:w-96 h-72 sm:h-96 bg-[#C6A75E]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-32 -right-32 w-72 sm:w-96 h-72 sm:h-96 bg-[#C6A75E]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                
+                <!-- Left Text Content -->
+                <div class="lg:col-span-7 space-y-5 sm:space-y-7 text-center lg:text-left reveal-item">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8DCC8]/10 border border-[#C6A75E]/40 text-[11px] sm:text-xs tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#C6A75E] shadow-sm">
+                        <i class="fa-solid fa-crown text-[9px] text-[#C6A75E]"></i>
+                        <span>Haute Parfumerie 2026</span>
+                    </div>
+                    
+                    <h1 class="font-cinzel text-3xl sm:text-5xl lg:text-7xl font-bold tracking-wider leading-[1.12]">
+                        Elvan <span class="gold-gradient-text font-normal italic inline-block">Aura</span>
+                    </h1>
+                    
+                    <p class="text-sm sm:text-base lg:text-lg text-[#E8DCC8]/85 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed px-1 sm:px-0">
+                        A fragrance that stays with you. An exquisite fusion of deep botanical essences, warm golden amber, and captivating elegance crafted for the discerning soul.
+                    </p>
+                    
+                    <!-- Primary CTA -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-1 sm:pt-2">
+                        <button onclick="addToCart('Elvan Aura Eau de Parfum', 145, '157281.jpg.jpeg')" class="btn-gold-shimmer w-full sm:w-auto px-8 sm:px-10 py-3.5 sm:py-4 bg-[#C6A75E] text-[#1F2A44] font-cinzel font-bold text-xs sm:text-sm tracking-[0.2em] uppercase hover:bg-[#E8DCC8] hover:shadow-[0_0_25px_rgba(198,167,94,0.4)] active:scale-95 transition-all duration-200 shadow-xl text-center group">
+                            <span class="flex items-center justify-center gap-2.5 sm:gap-3">
+                                <span>Shop Elvan Aura</span>
+                                <span class="text-[#1F2A44]/60">&bull;</span>
+                                <span class="font-extrabold">$145</span>
+                                <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                        </button>
+                    </div>
+
+                    <!-- Trust Stats Highlights -->
+                    <div class="grid grid-cols-3 gap-2 sm:gap-6 pt-6 sm:pt-8 border-t border-[#C6A75E]/20 max-w-lg mx-auto lg:mx-0 text-center">
+                        <div class="px-1">
+                            <p class="font-cinzel font-bold text-xl sm:text-2xl lg:text-3xl gold-gradient-text">100ml</p>
+                            <p class="text-[10px] sm:text-xs text-[#E8DCC8]/75 uppercase tracking-wider mt-1">Extrait</p>
+                        </div>
+                        <div class="border-x border-[#C6A75E]/20 px-1">
+                            <p class="font-cinzel font-bold text-xl sm:text-2xl lg:text-3xl gold-gradient-text">18+ Hrs</p>
+                            <p class="text-[10px] sm:text-xs text-[#E8DCC8]/75 uppercase tracking-wider mt-1">Sillage</p>
+                        </div>
+                        <div class="px-1">
+                            <p class="font-cinzel font-bold text-xl sm:text-2xl lg:text-3xl gold-gradient-text">100%</p>
+                            <p class="text-[10px] sm:text-xs text-[#E8DCC8]/75 uppercase tracking-wider mt-1">Botanicals</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Hero Image Showcase -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-xs sm:max-w-sm lg:max-w-md mx-auto">
+                        <!-- Subtle Gold Frame Glow -->
+                        <div class="absolute -inset-2 bg-[#C6A75E]/20 rounded-2xl sm:rounded-3xl blur-xl pointer-events-none"></div>
+                        
+                        <!-- Bottle Frame -->
+                        <div class="relative rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#C6A75E]/60 shadow-[0_16px_40px_rgba(0,0,0,0.6)] bg-[#141C2E]">
+                            <img src="157281.jpg.jpeg" alt="Elvan Aura Eau de Parfum" class="w-full h-[370px] sm:h-[440px] lg:h-[480px] object-cover object-top" loading="eager">
+                            
+                            <!-- Shading Gradient Overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#141C2E] via-transparent to-transparent opacity-75"></div>
+                            
+                            <!-- Bottom Tag in Showcase -->
+                            <div class="absolute bottom-3 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 text-center">
+                                <div class="inline-block px-3 py-1 rounded-full bg-[#141C2E]/90 border border-[#C6A75E]/40 mb-1 sm:mb-2 shadow-sm">
+                                    <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-[#C6A75E] font-semibold">Elvan Aura Eau de Parfum</span>
+                                </div>
+                                <h3 class="font-cinzel text-sm sm:text-xl font-bold text-[#E8DCC8] drop-shadow-md">&ldquo;A fragrance that stays with you&rdquo;</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Fragrance Main Accords Visualizer -->
+    <section id="accords" class="py-14 sm:py-20 bg-[#141C2E] border-t border-[#C6A75E]/20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 reveal-item">
+                <span class="text-[11px] sm:text-xs tracking-[0.35em] uppercase text-[#C6A75E] font-semibold">Harmonic Composition</span>
+                <h2 class="font-cinzel text-2xl sm:text-3xl lg:text-4xl font-bold mt-2">Main Olfactory Accords</h2>
+                <p class="text-[#E8DCC8]/75 text-xs sm:text-sm mt-2 sm:mt-3 px-2">The delicate balance of warmth, sensuality, and luminous freshness measured in pure aromatic harmony.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 max-w-4xl mx-auto reveal-item">
+                <!-- Accord 1 -->
+                <div class="luxury-card p-4 sm:p-6 rounded-xl sm:rounded-2xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="flex items-center gap-2.5 sm:gap-3">
+                            <i class="fa-solid fa-fire text-[#C6A75E] text-sm sm:text-base"></i>
+                            <span class="font-cinzel font-semibold text-xs sm:text-sm tracking-wider">Warm Golden Amber</span>
+                        </div>
+                        <span class="text-xs font-bold text-[#C6A75E]">94%</span>
+                    </div>
+                    <div class="w-full bg-[#141C2E] h-2 sm:h-2.5 rounded-full overflow-hidden border border-[#C6A75E]/20">
+                        <div class="accord-bar-fill h-full gold-gradient-bg rounded-full shadow-[0_0_8px_#C6A75E]" data-width="94%"></div>
+                    </div>
+                </div>
+
+                <!-- Accord 2 -->
+                <div class="luxury-card p-4 sm:p-6 rounded-xl sm:rounded-2xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="flex items-center gap-2.5 sm:gap-3">
+                            <i class="fa-solid fa-lemon text-[#C6A75E] text-sm sm:text-base"></i>
+                            <span class="font-cinzel font-semibold text-xs sm:text-sm tracking-wider">Sicilian Bergamot & Citrus</span>
+                        </div>
+                        <span class="text-xs font-bold text-[#C6A75E]">82%</span>
+                    </div>
+                    <div class="w-full bg-[#141C2E] h-2 sm:h-2.5 rounded-full overflow-hidden border border-[#C6A75E]/20">
+                        <div class="accord-bar-fill h-full gold-gradient-bg rounded-full shadow-[0_0_8px_#C6A75E]" data-width="82%"></div>
+                    </div>
+                </div>
+
+                <!-- Accord 3 -->
+                <div class="luxury-card p-4 sm:p-6 rounded-xl sm:rounded-2xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="flex items-center gap-2.5 sm:gap-3">
+                            <i class="fa-solid fa-spa text-[#C6A75E] text-sm sm:text-base"></i>
+                            <span class="font-cinzel font-semibold text-xs sm:text-sm tracking-wider">Sensual Jasmine & White Florals</span>
+                        </div>
+                        <span class="text-xs font-bold text-[#C6A75E]">88%</span>
+                    </div>
+                    <div class="w-full bg-[#141C2E] h-2 sm:h-2.5 rounded-full overflow-hidden border border-[#C6A75E]/20">
+                        <div class="accord-bar-fill h-full gold-gradient-bg rounded-full shadow-[0_0_8px_#C6A75E]" data-width="88%"></div>
+                    </div>
+                </div>
+
+                <!-- Accord 4 -->
+                <div class="luxury-card p-4 sm:p-6 rounded-xl sm:rounded-2xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="flex items-center gap-2.5 sm:gap-3">
+                            <i class="fa-solid fa-tree text-[#C6A75E] text-sm sm:text-base"></i>
+                            <span class="font-cinzel font-semibold text-xs sm:text-sm tracking-wider">Smoked Cedar & Madagascar Vanilla</span>
+                        </div>
+                        <span class="text-xs font-bold text-[#C6A75E]">79%</span>
+                    </div>
+                    <div class="w-full bg-[#141C2E] h-2 sm:h-2.5 rounded-full overflow-hidden border border-[#C6A75E]/20">
+                        <div class="accord-bar-fill h-full gold-gradient-bg rounded-full shadow-[0_0_8px_#C6A75E]" data-width="79%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Story & Essence Section -->
+    <section id="story" class="py-16 sm:py-24 bg-[#1F2A44] border-t border-[#C6A75E]/20 relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal-item">
+            <span class="text-[11px] sm:text-xs tracking-[0.35em] uppercase text-[#C6A75E] font-semibold">The Philosophy</span>
+            <h2 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold mt-2 mb-4 sm:mb-6">Crafted for Timeless Presence</h2>
+            <p class="text-[#E8DCC8]/85 font-light leading-relaxed text-sm sm:text-base lg:text-lg px-2 sm:px-0">
+                At Elvan Fragrances, we believe scent is the ultimate invisible accessory. Inspired by deep oceanic serenity and refined royal gold, each bottle is meticulously formulated to evoke confidence, mystique, and an unforgettable aura.
+            </p>
+            <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6 sm:gap-10 lg:gap-14 mt-8 sm:mt-12 text-[#C6A75E]">
+                <div class="flex items-center gap-3 group cursor-default">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#141C2E] border border-[#C6A75E]/40 flex items-center justify-center group-hover:scale-105 group-hover:border-[#C6A75E] transition-all">
+                        <i class="fa-solid fa-droplet text-xs sm:text-sm text-[#C6A75E]"></i>
+                    </div>
+                    <span class="font-cinzel text-xs sm:text-sm text-[#E8DCC8] tracking-widest uppercase font-semibold">Pure Extrait</span>
+                </div>
+                <div class="flex items-center gap-3 group cursor-default">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#141C2E] border border-[#C6A75E]/40 flex items-center justify-center group-hover:scale-105 group-hover:border-[#C6A75E] transition-all">
+                        <i class="fa-solid fa-shield-heart text-xs sm:text-sm text-[#C6A75E]"></i>
+                    </div>
+                    <span class="font-cinzel text-xs sm:text-sm text-[#E8DCC8] tracking-widest uppercase font-semibold">Skin Safe & Cruelty Free</span>
+                </div>
+                <div class="flex items-center gap-3 group cursor-default">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#141C2E] border border-[#C6A75E]/40 flex items-center justify-center group-hover:scale-105 group-hover:border-[#C6A75E] transition-all">
+                        <i class="fa-solid fa-gem text-xs sm:text-sm text-[#C6A75E]"></i>
+                    </div>
+                    <span class="font-cinzel text-xs sm:text-sm text-[#E8DCC8] tracking-widest uppercase font-semibold">Master Perfumery</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fragrance Notes Breakdown -->
+    <section class="py-16 sm:py-24 bg-[#141C2E] border-t border-[#C6A75E]/20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-xl mx-auto mb-10 sm:mb-16 reveal-item">
+                <span class="text-[11px] sm:text-xs tracking-[0.3em] uppercase text-[#C6A75E] font-semibold">Olfactory Pyramid</span>
+                <h2 class="font-cinzel text-2xl sm:text-3xl lg:text-4xl font-bold mt-2">The Anatomy of Elvan Aura</h2>
+                <p class="text-[#E8DCC8]/70 text-xs sm:text-sm mt-2 sm:mt-3 px-2">Experience how the notes unfold gracefully on your skin throughout the day.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Top Notes -->
+                <div class="luxury-card p-6 sm:p-8 rounded-xl sm:rounded-2xl text-center relative reveal-item group">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#C6A75E] text-[#1F2A44] text-[9px] sm:text-[10px] uppercase font-bold tracking-widest px-3 py-0.5 rounded-full shadow">
+                        Opening 0-30 Mins
+                    </div>
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4 sm:mb-5 rounded-full bg-[#C6A75E]/10 border border-[#C6A75E] flex items-center justify-center text-[#C6A75E] group-hover:scale-105 group-hover:bg-[#C6A75E] group-hover:text-[#1F2A44] transition-all duration-300">
+                        <i class="fa-solid fa-wind text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-[#E8DCC8] mb-2">Top Notes</h3>
+                    <p class="text-xs sm:text-sm text-[#E8DCC8]/75 leading-relaxed">Sicilian Bergamot, Pink Peppercorn, Crisp Morning Dew</p>
+                    <div class="mt-4 flex flex-wrap justify-center gap-1.5">
+                        <span class="text-[9px] sm:text-[10px] bg-[#141C2E] border border-[#C6A75E]/30 px-2.5 py-1 rounded text-[#C6A75E]">Radiant</span>
+                        <span class="text-[9px] sm:text-[10px] bg-[#141C2E] border border-[#C6A75E]/30 px-2.5 py-1 rounded text-[#C6A75E]">Zesty</span>
+                    </div>
+                </div>
+
+                <!-- Heart Notes -->
+                <div class="luxury-card p-6 sm:p-8 rounded-xl sm:rounded-2xl text-center relative reveal-item group">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#C6A75E] text-[#1F2A44] text-[9px] sm:text-[10px] uppercase font-bold tracking-widest px-3 py-0.5 rounded-full shadow">
+                        Soul 2-6 Hours
+                    </div>
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4 sm:mb-5 rounded-full bg-[#C6A75E]/10 border border-[#C6A75E] flex items-center justify-center text-[#C6A75E] group-hover:scale-105 group-hover:bg-[#C6A75E] group-hover:text-[#1F2A44] transition-all duration-300">
+                        <i class="fa-solid fa-spa text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-[#E8DCC8] mb-2">Heart Notes</h3>
+                    <p class="text-xs sm:text-sm text-[#E8DCC8]/75 leading-relaxed">Jasmine Sambac, Orris Root, Golden Amber Blossom</p>
+                    <div class="mt-4 flex flex-wrap justify-center gap-1.5">
+                        <span class="text-[9px] sm:text-[10px] bg-[#141C2E] border border-[#C6A75E]/30 px-2.5 py-1 rounded text-[#C6A75E]">Floral</span>
+                        <span class="text-[9px] sm:text-[10px] bg-[#141C2E] border border-[#C6A75E]/30 px-2.5 py-1 rounded text-[#C6A75E]">Velvety</span>
+                    </div>
+                </div>
+
+                <!-- Base Notes -->
+                <div class="luxury-card p-6 sm:p-8 rounded-xl sm:rounded-2xl text-center relative reveal-item group">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#C6A75E] text-[#1F2A44] text-[9px] sm:text-[10px] uppercase font-bold tracking-widest px-3 py-0.5 rounded-full shadow">
+                        Drydown 6-18+ Hours
+                    </div>
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4 sm:mb-5 rounded-full bg-[#C6A75E]/10 border border-[#C6A75E] flex items-center justify-center text-[#C6A75E] group-hover:scale-105 group-hover:bg-[#C6A75E] group-hover:text-[#1F2A44] transition-all duration-300">
+                        <i class="fa-solid fa-fire-flame-curved text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="font-cinzel text-xl sm:text-2xl font-bold text-[#E8DCC8] mb-2">Base Notes</h3>
+                    <p class="text-xs sm:text-sm text-[#E8DCC8]/75 leading-relaxed">Virginian Cedarwood, White Musk, Madagascar Vanilla</p>
+                    <div class="mt-4 flex flex-wrap justify-center gap-1.5">
+                        <span class="text-[9px] sm:text-[10px] bg-[#141C2E] border border-[#C6A75E]/30 px-2.5 py-1 rounded text-[#C6A75E]">Warm Wood</span>
+                        <span class="text-[9px] sm:text-[10px] bg-[#141C2E] border border-[#C6A75E]/30 px-2.5 py-1 rounded text-[#C6A75E]">Hypnotic</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="reviews" class="py-16 sm:py-24 bg-[#1F2A44] relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-xl mx-auto mb-10 sm:mb-16 reveal-item">
+                <span class="text-[11px] sm:text-xs tracking-[0.3em] uppercase text-[#C6A75E] font-semibold">Client Experiences</span>
+                <h2 class="font-cinzel text-2xl sm:text-3xl lg:text-4xl font-bold mt-2">Loved by Connoisseurs</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="luxury-card p-6 sm:p-8 rounded-xl sm:rounded-2xl relative reveal-item group">
+                    <i class="fa-solid fa-quote-right absolute top-5 right-5 sm:top-6 sm:right-6 text-2xl sm:text-3xl text-[#C6A75E]/15 group-hover:text-[#C6A75E]/30 transition-colors"></i>
+                    <div class="flex text-[#C6A75E] mb-3 sm:mb-4 text-xs sm:text-sm gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs sm:text-sm text-[#E8DCC8]/90 italic mb-5 sm:mb-6 leading-relaxed">&ldquo;Elvan Aura truly lives up to its tagline. I put it on before an evening event and could still smell the warm amber notes the next morning. Absolute masterpiece.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-[#C6A75E]/20 border border-[#C6A75E] flex items-center justify-center font-cinzel font-bold text-xs text-[#C6A75E]">SV</div>
+                        <p class="font-cinzel font-bold text-xs sm:text-sm text-[#C6A75E]">Sophia V. <span class="text-[11px] sm:text-xs font-normal text-[#E8DCC8]/60">&bull; Verified Patron</span></p>
+                    </div>
+                </div>
+
+                <div class="luxury-card p-6 sm:p-8 rounded-xl sm:rounded-2xl relative reveal-item group">
+                    <i class="fa-solid fa-quote-right absolute top-5 right-5 sm:top-6 sm:right-6 text-2xl sm:text-3xl text-[#C6A75E]/15 group-hover:text-[#C6A75E]/30 transition-colors"></i>
+                    <div class="flex text-[#C6A75E] mb-3 sm:mb-4 text-xs sm:text-sm gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs sm:text-sm text-[#E8DCC8]/90 italic mb-5 sm:mb-6 leading-relaxed">&ldquo;The bottle design with the gold EV monogram is stunning on my vanity. The scent is rich, sophisticated, and earns compliments everywhere I go.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-[#C6A75E]/20 border border-[#C6A75E] flex items-center justify-center font-cinzel font-bold text-xs text-[#C6A75E]">ML</div>
+                        <p class="font-cinzel font-bold text-xs sm:text-sm text-[#C6A75E]">Marcus L. <span class="text-[11px] sm:text-xs font-normal text-[#E8DCC8]/60">&bull; Verified Patron</span></p>
+                    </div>
+                </div>
+
+                <div class="luxury-card p-6 sm:p-8 rounded-xl sm:rounded-2xl relative reveal-item group">
+                    <i class="fa-solid fa-quote-right absolute top-5 right-5 sm:top-6 sm:right-6 text-2xl sm:text-3xl text-[#C6A75E]/15 group-hover:text-[#C6A75E]/30 transition-colors"></i>
+                    <div class="flex text-[#C6A75E] mb-3 sm:mb-4 text-xs sm:text-sm gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs sm:text-sm text-[#E8DCC8]/90 italic mb-5 sm:mb-6 leading-relaxed">&ldquo;Unmatched luxury packaging and lightning-fast delivery. Elvan Aura is now my signature scent for business meetings and formal occasions.&rdquo;</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-[#C6A75E]/20 border border-[#C6A75E] flex items-center justify-center font-cinzel font-bold text-xs text-[#C6A75E]">AK</div>
+                        <p class="font-cinzel font-bold text-xs sm:text-sm text-[#C6A75E]">Alexander K. <span class="text-[11px] sm:text-xs font-normal text-[#E8DCC8]/60">&bull; Verified Patron</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0D1322] border-t border-[#C6A75E]/20 text-[#E8DCC8] py-12 sm:py-16 relative z-10 pb-safe">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-[#C6A75E]/10">
+                <!-- Col 1: Brand -->
+                <div class="space-y-3 sm:space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-[#1F2A44] border border-[#C6A75E] flex items-center justify-center shadow-sm">
+                            <span class="font-cinzel font-bold text-sm gold-gradient-text">EV</span>
+                        </div>
+                        <span class="font-cinzel font-bold tracking-[0.2em] text-lg">ELVAN</span>
+                    </div>
+                    <p class="text-xs text-[#E8DCC8]/70 leading-relaxed">
+                        Exquisite luxury fragrances crafted to define your aura and leave an eternal impression.
+                    </p>
+                    <div class="flex gap-4 text-[#C6A75E] text-base pt-1">
+                        <a href="#" class="hover:text-[#E8DCC8] p-1 transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-[#E8DCC8] p-1 transition-colors" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-[#E8DCC8] p-1 transition-colors" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div>
+                    <h4 class="font-cinzel font-bold text-xs sm:text-sm tracking-widest text-[#C6A75E] uppercase mb-3 sm:mb-4">Quick Navigation</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-[#E8DCC8]/80">
+                        <li><a href="#home" class="hover:text-[#C6A75E] transition-colors py-0.5 inline-block">Home</a></li>
+                        <li><a href="#story" class="hover:text-[#C6A75E] transition-colors py-0.5 inline-block">Our Craft</a></li>
+                        <li><a href="#accords" class="hover:text-[#C6A75E] transition-colors py-0.5 inline-block">The Scent</a></li>
+                        <li><a href="#reviews" class="hover:text-[#C6A75E] transition-colors py-0.5 inline-block">Client Reviews</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Customer Care -->
+                <div>
+                    <h4 class="font-cinzel font-bold text-xs sm:text-sm tracking-widest text-[#C6A75E] uppercase mb-3 sm:mb-4">Customer Care</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-[#E8DCC8]/80">
+                        <li><a href="#" class="hover:text-[#C6A75E] transition-colors py-0.5 inline-block">Shipping & Delivery</a></li>
+                        <li><a href="#" class="hover:text-[#C6A75E] transition-colors py-0.5 inline-block">Returns & Authenticity</a></li>
+                        <li><a href="#" class="hover:text-[#C6A75E] transition-colors py-0.5 inline-block">Store Locator</a></li>
+                        <li><a href="#" class="hover:text-[#C6A75E] transition-colors py-0.5 inline-block">Contact Concierge</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Newsletter -->
+                <div>
+                    <h4 class="font-cinzel font-bold text-xs sm:text-sm tracking-widest text-[#C6A75E] uppercase mb-3 sm:mb-4">Join The Inner Circle</h4>
+                    <p class="text-xs text-[#E8DCC8]/70 mb-3 sm:mb-4">Subscribe to receive private release invitations, olfactory insights, and bespoke offers.</p>
+                    <form onsubmit="event.preventDefault(); showToast('Thank you for joining the Elvan Inner Circle.');" class="flex flex-col sm:flex-row gap-2">
+                        <input type="email" placeholder="Enter your email" required class="bg-[#1F2A44] border border-[#C6A75E]/30 px-3.5 py-2.5 text-base sm:text-xs text-[#E8DCC8] focus:outline-none focus:border-[#C6A75E] flex-1 rounded">
+                        <button type="submit" class="btn-gold-shimmer bg-[#C6A75E] text-[#1F2A44] px-5 py-2.5 font-cinzel font-bold text-xs uppercase hover:bg-[#E8DCC8] transition-colors rounded">Join</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] sm:text-xs text-[#E8DCC8]/60 text-center sm:text-left gap-3">
+                <p>&copy; 2026 Elvan Fragrances. All Rights Reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-[#C6A75E] transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-[#C6A75E] transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Floating Button -->
+    <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#1F2A44] border-2 border-[#C6A75E] text-[#C6A75E] shadow-2xl flex items-center justify-center opacity-0 pointer-events-none hover:bg-[#C6A75E] hover:text-[#1F2A44] active:scale-95 transition-all duration-300" title="Back to Top" aria-label="Back to Top">
+        <i class="fa-solid fa-chevron-up text-xs sm:text-sm"></i>
+    </button>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-4 sm:top-6 right-4 sm:right-6 left-4 sm:left-auto z-50 flex flex-col gap-2.5 pointer-events-none"></div>
+
+    <!-- Slide-over Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+        <div class="absolute inset-0 bg-black/75 backdrop-blur-sm transition-opacity" onclick="toggleCartDrawer()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex">
+            <div class="w-screen max-w-full sm:max-w-md bg-[#141C2E] border-l border-[#C6A75E]/30 text-[#E8DCC8] shadow-2xl flex flex-col h-full">
+                <!-- Drawer Header -->
+                <div class="p-4 sm:p-6 border-b border-[#C6A75E]/20 flex items-center justify-between bg-[#1F2A44]">
+                    <h3 id="cart-title" class="font-cinzel font-bold text-base sm:text-lg tracking-widest uppercase text-[#C6A75E]">Your Shopping Bag</h3>
+                    <button onclick="toggleCartDrawer()" class="w-9 h-9 flex items-center justify-center text-[#E8DCC8] hover:text-[#C6A75E] rounded-lg transition-colors" aria-label="Close Shopping Bag">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Drawer Items -->
+                <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+                    <!-- Dynamic cart items inserted here -->
+                </div>
+                
+                <!-- Drawer Footer (Safe for iPhone home bar) -->
+                <div class="p-4 sm:p-6 border-t border-[#C6A75E]/20 space-y-3 sm:space-y-4 bg-[#1F2A44] pb-safe">
+                    <div class="flex justify-between font-cinzel text-base sm:text-lg font-bold">
+                        <span>Subtotal:</span>
+                        <span id="cart-subtotal" class="gold-gradient-text">$0.00</span>
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-[#E8DCC8]/70">Complimentary insured express shipping applied.</p>
+                    <button onclick="checkout()" class="btn-gold-shimmer w-full py-3.5 sm:py-4 gold-gradient-bg text-[#1F2A44] font-cinzel font-bold text-xs sm:text-sm tracking-widest uppercase hover:brightness-110 active:scale-98 transition-all shadow-lg text-center rounded">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-start justify-center pt-16 sm:pt-24 px-4" role="dialog" aria-modal="true">
+        <div class="bg-[#141C2E] border border-[#C6A75E]/40 w-full max-w-xl rounded-xl sm:rounded-2xl p-5 sm:p-6 shadow-2xl relative">
+            <button onclick="openSearchModal()" class="absolute top-4 right-4 w-9 h-9 flex items-center justify-center text-[#E8DCC8] hover:text-[#C6A75E] rounded-lg" aria-label="Close Search">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="font-cinzel text-lg sm:text-xl font-bold mb-4 gold-gradient-text">Search Fragrance Notes</h3>
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-[#C6A75E]"></i>
+                <input type="text" id="search-input" placeholder="Search notes (amber, bergamot, cedar)..." class="w-full bg-[#1F2A44] border border-[#C6A75E]/30 rounded-lg pl-12 pr-4 py-3 text-base sm:text-sm text-[#E8DCC8] focus:outline-none focus:border-[#C6A75E]">
+            </div>
+            <div class="mt-4 text-xs text-[#E8DCC8]/60 flex items-center gap-2 flex-wrap">
+                <span>Popular:</span>
+                <span class="text-[#C6A75E] cursor-pointer hover:underline py-0.5" onclick="quickSearch('Aura')">Elvan Aura</span> &bull;
+                <span class="text-[#C6A75E] cursor-pointer hover:underline py-0.5" onclick="quickSearch('Amber')">Golden Amber</span> &bull;
+                <span class="text-[#C6A75E] cursor-pointer hover:underline py-0.5" onclick="quickSearch('Bergamot')">Sicilian Bergamot</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script>
+        let cart = [];
+
+        // Mobile Menu Controls
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            menu.classList.add('hidden');
+            if (icon) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Cart Drawer Controls
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+            if (!drawer.classList.contains('hidden')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Search Modal Controls
+        function openSearchModal() {
+            const modal = document.getElementById('search-modal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) {
+                setTimeout(() => document.getElementById('search-input').focus(), 50);
+            }
+        }
+
+        function quickSearch(term) {
+            document.getElementById('search-input').value = term;
+            openSearchModal();
+        }
+
+        // Responsive Toast Notification System
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto flex items-center gap-3 bg-[#1F2A44] border border-[#C6A75E] text-[#E8DCC8] px-4 sm:px-5 py-3 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] transform translate-y-[-10px] opacity-0 transition-all duration-200';
+            toast.innerHTML = `
+                <div class="w-6 h-6 rounded-full bg-[#C6A75E]/20 text-[#C6A75E] flex items-center justify-center text-xs shrink-0">
+                    <i class="fa-solid fa-sparkles"></i>
+                </div>
+                <span class="text-xs font-semibold tracking-wide">${message}</span>
+            `;
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-[-10px]', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-[-10px]', 'opacity-0');
+                setTimeout(() => toast.remove(), 250);
+            }, 2500);
+        }
+
+        // Cart State & DOM Updates
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, image, quantity: 1 });
+            }
+            updateCartUI();
+            toggleCartDrawer();
+            showToast(`Added ${name} to your bag.`);
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const container = document.getElementById('cart-items-container');
+            const subtotalEl = document.getElementById('cart-subtotal');
+
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.textContent = totalCount;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-center text-[#E8DCC8]/60 py-12 font-cinzel tracking-widest text-xs sm:text-sm">Your shopping bag is empty.</p>';
+                subtotalEl.textContent = '$0.00';
+                return;
+            }
+
+            let html = '';
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.quantity;
+                html += `
+                    <div class="flex items-center gap-3 sm:gap-4 bg-[#1F2A44] p-3 sm:p-4 rounded-xl border border-[#C6A75E]/25 shadow-sm">
+                        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 sm:w-16 sm:h-16 object-cover rounded-lg border border-[#C6A75E]/40 shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-cinzel font-bold text-xs sm:text-sm text-[#E8DCC8] truncate">${item.name}</h4>
+                            <p class="text-xs gold-gradient-text font-bold mt-0.5">$${item.price}</p>
+                            <div class="flex items-center gap-3 mt-2">
+                                <button onclick="updateQuantity(${index}, -1)" class="w-7 h-7 sm:w-6 sm:h-6 flex items-center justify-center text-xs bg-[#141C2E] rounded border border-[#C6A75E]/30 active:bg-[#C6A75E] active:text-[#1F2A44] transition-colors" aria-label="Decrease quantity">-</button>
+                                <span class="text-xs font-bold px-1">${item.quantity}</span>
+                                <button onclick="updateQuantity(${index}, 1)" class="w-7 h-7 sm:w-6 sm:h-6 flex items-center justify-center text-xs bg-[#141C2E] rounded border border-[#C6A75E]/30 active:bg-[#C6A75E] active:text-[#1F2A44] transition-colors" aria-label="Increase quantity">+</button>
+                            </div>
+                        </div>
+                        <button onclick="removeItem(${index})" class="text-[#E8DCC8]/50 hover:text-red-400 p-2.5 transition-colors" title="Remove" aria-label="Remove item">
+                            <i class="fa-solid fa-trash-can text-sm"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            subtotalEl.textContent = '$' + subtotal.toFixed(2);
+        }
+
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your shopping bag is empty.');
+                return;
+            }
+            alert('Thank you for shopping with Elvan Fragrances! Secure checkout simulation complete.');
+            cart = [];
+            updateCartUI();
+            toggleCartDrawer();
+        }
+
+        // Scroll Reveal Animations via Intersection Observer
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    const accordBars = entry.target.querySelectorAll('.accord-bar-fill');
+                    accordBars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal-item').forEach(el => revealObserver.observe(el));
+
+        // Optimized Passive Scroll Listener
+        const backToTopBtn = document.getElementById('back-to-top');
+        const navbar = document.getElementById('navbar');
+        let scrollTicking = false;
+
+        window.addEventListener('scroll', () => {
+            if (!scrollTicking) {
+                requestAnimationFrame(() => {
+                    const scrolled = window.scrollY;
+                    if (scrolled > 300) {
+                        backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                        backToTopBtn.classList.add('opacity-100');
+                    } else {
+                        backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                        backToTopBtn.classList.remove('opacity-100');
+                    }
+
+                    if (scrolled > 20) {
+                        navbar.classList.add('shadow-lg');
+                    } else {
+                        navbar.classList.remove('shadow-lg');
+                    }
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
+            }
+        }, { passive: true });
+    </script>
+</body>
+</html>
