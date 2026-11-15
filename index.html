@@ -281,7 +281,7 @@
                                 <span class="text-[#C6A75E]">Signature</span>
                             </div>
                         </button>
-                        <button onclick="switchHeroImage('picture12.jpeg', 'Elvan Aura Pour Femme', 'The essence of feminine grace', this)" class="hero-thumb flex items-center gap-2 px-3 py-1.5 rounded-lg border-2 border-[#C6A75E]/30 shadow-md transition-all bg-[#141C2E] hover:border-[#C6A75E]" title="Pour Femme (Women's Edition)" aria-label="Show Women's Edition">
+                        <button onclick="switchHeroImage('picture12.jpeg', 'Elvan Pour Femme', 'The essence of feminine grace', this)" class="hero-thumb flex items-center gap-2 px-3 py-1.5 rounded-lg border-2 border-[#C6A75E]/30 shadow-md transition-all bg-[#141C2E] hover:border-[#C6A75E]" title="Pour Femme (Women's Edition)" aria-label="Show Women's Edition">
                             <img src="picture12.jpeg" alt="Pour Femme" class="w-7 h-9 object-cover object-top rounded">
                             <div class="text-left font-cinzel text-[10px] tracking-wider leading-tight">
                                 <span class="block text-[#E8DCC8] font-bold">Pour Femme</span>
@@ -390,7 +390,7 @@
                         <i class="fa-solid fa-crown text-[9px] text-[#C6A75E]"></i>
                         <span>Women's Haute Parfumerie</span>
                     </div>
-                    <h2 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold mt-2">Elvan Aura <span class="gold-gradient-text font-normal italic">Pour Femme</span></h2>
+                    <h2 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold mt-2">Elvan <span class="gold-gradient-text font-normal italic">Pour Femme</span></h2>
                     <p class="text-[#E8DCC8]/85 font-light leading-relaxed text-sm sm:text-base lg:text-lg">
                         An intoxicating feminine masterpiece crafted for the modern woman whose presence is unforgettably felt. Inspired by royal scarlet velvet and golden floral nectar, each drop unfolds with radiant crimson berries, precious damascena rose, and an eternal trail of Madagascar vanilla and warm amber.
                     </p>
@@ -415,7 +415,7 @@
                         </div>
                     </div>
                     <div class="pt-2 flex justify-center lg:justify-start">
-                        <button onclick="addToCart('Elvan Aura Pour Femme', 2499, 'picture12.jpeg')" class="btn-gold-shimmer px-8 py-3.5 bg-[#C6A75E] text-[#1F2A44] font-cinzel font-bold text-xs sm:text-sm tracking-[0.2em] uppercase hover:bg-[#E8DCC8] rounded transition-all shadow-lg text-center">
+                        <button onclick="addToCart('Elvan Pour Femme', 2499, 'picture12.jpeg')" class="btn-gold-shimmer px-8 py-3.5 bg-[#C6A75E] text-[#1F2A44] font-cinzel font-bold text-xs sm:text-sm tracking-[0.2em] uppercase hover:bg-[#E8DCC8] rounded transition-all shadow-lg text-center">
                             Shop Pour Femme &bull; ₹2,499
                         </button>
                     </div>
@@ -430,7 +430,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-xl mx-auto mb-10 sm:mb-16 reveal-item">
                 <span class="text-[11px] sm:text-xs tracking-[0.3em] uppercase text-[#C6A75E] font-semibold">Olfactory Pyramid</span>
-                <h2 class="font-cinzel text-2xl sm:text-3xl lg:text-4xl font-bold mt-2">The Anatomy of Elvan Aura</h2>
+                <h2 class="font-cinzel text-2xl sm:text-3xl lg:text-4xl font-bold mt-2">The Anatomy of Elvan</h2>
                 <p class="text-[#E8DCC8]/70 text-xs sm:text-sm mt-2 sm:mt-3 px-2">Experience how the notes unfold gracefully on your skin throughout the day.</p>
             </div>
             
@@ -737,12 +737,12 @@
             
             currentHeroProduct.name = name;
             currentHeroProduct.image = src;
-            currentHeroProduct.price = name === 'Elvan Aura Pour Femme' ? 2499 : 2199;
+            currentHeroProduct.price = name === 'Elvan Pour Femme' ? 2499 : 2199;
 
-            const isPourFemme = name === 'Elvan Aura Pour Femme';
+            const isPourFemme = name === 'Elvan Pour Femme';
             if (heroMainTitle) {
                 heroMainTitle.innerHTML = isPourFemme
-                    ? 'Elvan <span class="gold-gradient-text font-normal italic inline-block">Aura Pour Femme</span>'
+                    ? 'Elvan <span class="gold-gradient-text font-normal italic inline-block">Pour Femme</span>'
                     : 'Elvan <span class="gold-gradient-text font-normal italic inline-block">Aura</span>';
             }
             if (heroDescription) {
